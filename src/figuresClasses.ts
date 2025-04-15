@@ -22,8 +22,17 @@ export class Triangle implements Figure {
   }
 
   protected checkSides(): void {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw Error('All sides should be more than 0');
+    const fielsd: string[] = ['a', 'b', 'c'];
+    const wrong: string[] = [];
+
+    for (const side of fielsd) {
+      if (side in this && Number(this[side as keyof Triangle]) <= 0) {
+        wrong.push(side);
+      }
+    }
+
+    if (wrong.length) {
+      throw Error(`Sides (${wrong.join(', ')}) should be more than 0`);
     }
 
     if (this.semiPerimeter <= Math.max(this.a, this.b, this.c)) {
@@ -86,8 +95,17 @@ export class Rectangle implements Figure {
   }
 
   protected checkSides(): void {
-    if (this.width <= 0 || this.height <= 0) {
-      throw Error('All sides should be more than 0');
+    const fielsd: string[] = ['width', 'height'];
+    const wrong: string[] = [];
+
+    for (const side of fielsd) {
+      if (side in this && Number(this[side as keyof Rectangle]) <= 0) {
+        wrong.push(side);
+      }
+    }
+
+    if (wrong.length) {
+      throw Error(`Sides (${wrong.join(', ')}) should be more than 0`);
     }
   }
 
